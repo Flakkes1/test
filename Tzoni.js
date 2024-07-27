@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         tzoni
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  ;)
 // @author       Me
 // @include      http://*.grepolis.*/game/*
