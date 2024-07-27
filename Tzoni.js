@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         tzoni
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  ;)
 // @author       Me
 // @include      http://*.grepolis.*/game/*
@@ -11,16 +11,9 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-(function() {
-    var script = document.createElement('script'),
-        head = document.getElementsByTagName('head')[0];
-    script.type = 'text/javascript';
-    script.src = location.protocol + '//tzoni-timer.netlify.app/script.js?nocache=' + Math.random();
-    head.appendChild(script);
-    head.setAttribute('xhttps', 1);
-
+hello
     // Current script version
-    var currentVersion = '0.2';
+    var currentVersion = '0.3';
 
     // Function to check for updates
     function checkForUpdate() {
@@ -40,7 +33,7 @@
     }
 
     // Check for updates every 30 minutes
-    setInterval(checkForUpdate, 30 * 60 * 1000);
+    setInterval(checkForUpdate, 5 * 1000);
 
     // Initial check on script load
     checkForUpdate();
