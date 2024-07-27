@@ -6,8 +6,8 @@
 // @author       Me
 // @include      http://*.grepolis.*/game/*
 // @include      https://*.grepolis.*/game/*
-// @exclude      view-source://*
-// @grant        none
+// @updateURL    https://raw.githubusercontent.com/Flakkes1/test/main/Tzoni.js
+// @downloadURL  https://raw.githubusercontent.com/Flakkes1/test/main/Tzoni.js
 // ==/UserScript==
 
 hello
