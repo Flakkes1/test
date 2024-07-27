@@ -10,13 +10,4 @@
 // @grant        none
 // ==/UserScript==
 
-
-(function() {
-	var script = document.createElement('script'),
-		head = document.getElementsByTagName('head')[0];
-	script.type = 'text/javascript';
-	script.src = location.protocol+'//tzoni-timer.netlify.app/script.js?nocache=' + Math.random();
-	head.appendChild(script);
-	head.setAttribute('xhttps', 1);
-})();
-
+hello
