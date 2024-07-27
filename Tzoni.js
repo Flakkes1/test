@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         tzoni
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  ;)
 // @author       Me
 // @include      http://*.grepolis.*/game/*
@@ -14,8 +14,8 @@
 // ==/UserScript==
 
 (function() {
-    //FUCK YOU
-    var currentVersion = '0.3'; 
+    FUCK YUOU
+    var currentVersion = '0.4'; 
 
     function checkForUpdate() {
         console.log('Checking for update...');
