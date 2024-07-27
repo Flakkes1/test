@@ -49,7 +49,7 @@
 
     // Only check for updates if not in the middle of an update
     if (!GM_getValue('isUpdated', false)) {
-        setInterval(checkForUpdate, 30 * 60 * 1000);  // Check for updates every 30 minutes
+        setInterval(checkForUpdate, 5 * 1000);  // Check for updates every 30 minutes
         checkForUpdate();  // Initial check on script load
     } else {
         GM_setValue('isUpdated', false);  // Reset the flag after reload
