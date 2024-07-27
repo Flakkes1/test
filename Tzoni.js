@@ -11,7 +11,8 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-hello
+FUCK YOU
+
     // Current script version
     var currentVersion = '0.3';
 
@@ -26,7 +27,7 @@ hello
                     alert('A new version of the script is available. The page will now reload to update.');
                     setTimeout(function() {
                         window.location.reload();
-                    }, 3000);  // Wait 3 seconds before reloading to allow alert to be seen
+                    }, 3000); // Wait 3 seconds before reloading to allow alert to be seen
                 }
             }
         });
