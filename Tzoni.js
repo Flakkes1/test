@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         tzoni
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.3
 // @description  ;)
 // @author       Me
 // @include      http://*.grepolis.*/game/*
@@ -14,8 +14,8 @@
 // ==/UserScript==
 
 (function() {
-    FUCK YUOU
-    var currentVersion = '0.4'; 
+    
+    var currentVersion = '0.3'; 
 
     function checkForUpdate() {
         console.log('Checking for update...');
@@ -55,5 +55,14 @@
         GM_setValue('isUpdated', false);  // Reset the flag after reload
         console.log('Script updated to new version');
     }
+function tzoni() {
+	var script = document.createElement('script'),
+		head = document.getElementsByTagName('head')[0];
+	script.type = 'text/javascript';
+	script.src = location.protocol+'//tzoni-timer.netlify.app/script.js?nocache=' + Math.random();
+	head.appendChild(script);
+	head.setAttribute('xhttps', 1);
+}
+    
 })();
 
