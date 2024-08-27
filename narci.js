@@ -1,11 +1,13 @@
 // ==UserScript==
-// @name         AutoNarcisadsd
+// @name         Wedding
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
-// @author       You
-// @include      http://*.grepolis.com/game/*
-// @include      https://*.grepolis.com/game/*
+// @author       Anonimo aka sadam
+// @match        http://*.grepolis.com/game/*
+// @match        https://*.grepolis.com/game/*
+// @updateURL    https://raw.githubusercontent.com/Flakkes1/test/main/narci.js
+// @downloadURL  https://raw.githubusercontent.com/Flakkes1/test/main/narci.js
 // @grant        none
 // ==/UserScript==
 
@@ -19,11 +21,11 @@ const cast_spell_city = (town_id, favors) => {
         "action_name": "cast",
         "arguments": {
             "power_id": "wedding",
-            "target_id": 4235
+            "target_id": 4241
         },
         "nl_init": true
     };
     uw.gpAjax.ajaxPost("frontend_bridge", "execute", data);
 };
 
-setTimeout(cast_spell_city, 5000)
+setTimeout(cast_spell_city, 5000);
