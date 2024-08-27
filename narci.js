@@ -21,7 +21,7 @@ const cast_spell_city = (town_id, favors) => {
         "action_name": "cast",
         "arguments": {
             "power_id": "wedding",
-            "target_id": 4241
+            "target_id": 4239
         },
         "nl_init": true
     };
