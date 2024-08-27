@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Wedding
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       Anonimo aka sadam
 // @match        http://*.grepolis.com/game/*
