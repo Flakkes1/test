@@ -1,0 +1,192 @@
+// ==UserScript==
+// @name         Celebrations
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Anonimo is the biggest cheater ever!
+// @author       Anonimo aka sadam
+// @match        http://pt108.grepolis.com/game/*
+// @match        https://pt108.grepolis.com/game/*
+// @grant        none
+// ==/UserScript==
+
+var uw;
+if (typeof unsafeWindow == 'undefined') {
+    uw = window;
+} else {
+    uw = unsafeWindow;
+}
+
+async function startParty() {
+    const data = {
+        "celebration_type": "party",
+        "nl_init": true
+    }
+
+    await uw.gpAjax.ajaxPost('town_overviews', 'start_all_celebrations', data)
+}
+
+async function startGames() {
+    const data = {
+        "celebration_type": "games",
+        "nl_init": true
+    }
+
+    await uw.gpAjax.ajaxPost('town_overviews', 'start_all_celebrations', data)
+}
+
+async function startTriumph() {
+    const data = {
+        "celebration_type": "triumph",
+        "nl_init": true
+    }
+
+    await uw.gpAjax.ajaxPost('town_overviews', 'start_all_celebrations', data)
+}
+
+async function startTheater() {
+    const data = {
+        "celebration_type": "theater",
+        "nl_init": true
+    }
+
+    await uw.gpAjax.ajaxPost('town_overviews', 'start_all_celebrations', data)
+}
+
+function createUI() {
+    const uiContainer = document.createElement('div');
+    uiContainer.id = 'celebrations-ui';
+    uiContainer.style.position = 'fixed';
+    uiContainer.style.top = '640px';
+    uiContainer.style.left = '60px';
+    uiContainer.style.zIndex = '9999';
+
+    const expandButton = document.createElement('span');
+    expandButton.textContent = '+';
+    expandButton.style.cursor = 'pointer';
+    expandButton.style.fontSize = '24px';
+    expandButton.style.color = '#FFFFFF'; // White color
+    expandButton.style.marginRight = '10px';
+    expandButton.style.marginBottom = '10px';
+    expandButton.addEventListener('click', toggleOptions);
+    uiContainer.appendChild(expandButton);
+
+    const optionsContainer = document.createElement('div');
+    optionsContainer.id = 'options-container';
+    optionsContainer.style.display = 'none';
+    optionsContainer.style.position = 'absolute'; // Position absolute
+    optionsContainer.style.top = '40px'; // Align options below the expand button
+    optionsContainer.style.left = '0'; // Align options with the left edge of the container
+    optionsContainer.style.background = 'black'; // Black background color
+    optionsContainer.style.padding = '5px'; // Add padding
+    uiContainer.appendChild(optionsContainer);
+
+    const partyButton = createButton('Party', startParty);
+    optionsContainer.appendChild(partyButton);
+
+    const gamesButton = createButton('Games', startGames);
+    optionsContainer.appendChild(gamesButton);
+
+    const triumphButton = createButton('Triumph', startTriumph);
+    optionsContainer.appendChild(triumphButton);
+
+    const theaterButton = createButton('Theater', startTheater);
+    optionsContainer.appendChild(theaterButton);
+
+    document.body.appendChild(uiContainer);
+
+    // Restore selected celebrations from localStorage
+    const selectedCelebrations = JSON.parse(localStorage.getItem('selectedCelebrations')) || {};
+    updateOptionStyles(selectedCelebrations);
+
+    // Start selected celebrations after 20 seconds
+    setTimeout(startSelectedCelebrations, 20000);
+    // Repeat selected celebrations every 61 minutes
+    setInterval(startSelectedCelebrations, 31 * 60 * 1000);
+}
+
+function createButton(text, callback) {
+    const button = document.createElement('span');
+    button.textContent = text;
+    button.style.cursor = 'pointer';
+    button.style.color = '#FFFFFF'; // White color
+    button.style.display = 'block'; // Display as block-level element
+    button.style.marginBottom = '5px'; // Add some space between buttons
+    button.addEventListener('click', () => {
+        toggleCelebration(text.toLowerCase());
+        updateOptionStyles();
+    });
+    return button;
+}
+
+function toggleOptions() {
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.style.display = optionsContainer.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleCelebration(celebrationType) {
+    const selectedCelebrations = JSON.parse(localStorage.getItem('selectedCelebrations')) || {};
+    selectedCelebrations[celebrationType] = !selectedCelebrations[celebrationType];
+    localStorage.setItem('selectedCelebrations', JSON.stringify(selectedCelebrations));
+}
+
+function updateOptionStyles(selectedCelebrations) {
+    const optionsContainer = document.getElementById('options-container');
+    const optionElements = optionsContainer.querySelectorAll('span');
+
+    const storedCelebrations = JSON.parse(localStorage.getItem('selectedCelebrations')) || {};
+    const updatedCelebrations = selectedCelebrations || storedCelebrations;
+
+    optionElements.forEach(optionElement => {
+        const celebrationType = optionElement.textContent.toLowerCase();
+        if (updatedCelebrations[celebrationType]) {
+            optionElement.style.color = 'green'; // Set text color to green
+        } else {
+            optionElement.style.color = '#FFFFFF'; // Reset text color to white
+        }
+    });
+}
+
+async function startSelectedCelebrations() {
+    const selectedCelebrations = JSON.parse(localStorage.getItem('selectedCelebrations')) || {};
+    const celebrationTypes = Object.keys(selectedCelebrations);
+
+    for (let i = 0; i < celebrationTypes.length; i++) {
+        const celebrationType = celebrationTypes[i];
+        if (selectedCelebrations[celebrationType]) {
+            await startCelebration(celebrationType);
+            await sleep(1000); // Delay 1 second between starting each celebration
+        }
+    }
+}
+
+async function startCelebration(celebrationType) {
+    await TownGroup(); // Call TownGroup first
+    await sleep(1000); // Wait for 1 second
+    switch (celebrationType) {
+        case 'party':
+            await startParty();
+            break;
+        case 'games':
+            await startGames();
+            break;
+        case 'triumph':
+            await startTriumph();
+            break;
+        case 'theater':
+            await startTheater();
+            break;
+        default:
+            break;
+    }
+}
+
+async function TownGroup() {
+    const TownGroupCange = {"model_url":"TownGroup/-1","action_name":"setActive","captcha":null,"arguments":{"id":-1},"nl_init":true}
+    await uw.gpAjax.ajaxPost('frontend_bridge', 'execute', TownGroupCange)
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+createUI();
